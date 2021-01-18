@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "rohan-terraform"
+    bucket = "terraform-states-searce-academy"
     prefix = "main"
   }
 }
