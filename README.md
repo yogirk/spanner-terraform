@@ -1,0 +1,1 @@
+# Spanner Terraform Template
