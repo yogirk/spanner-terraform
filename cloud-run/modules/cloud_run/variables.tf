@@ -57,3 +57,9 @@ variable cloud_run_timeout {
   default     = "20m"
   description = "How long a Cloud Run operation is allowed to take before being considered a failure."
 }
+
+variable allow_public_access {
+  type        = bool
+  default     = true
+  description = "Allow non-authenticated access to the service."
+}

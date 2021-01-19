@@ -57,18 +57,11 @@ resource "google_cloud_run_service" "stock_app" {
   }
 }
 
-data "google_iam_policy" "noauth" {
-  binding {
-    role = "roles/run.invoker"
-    members = [
-      "allUsers",
-    ]
-  }
-}
-
-resource "google_cloud_run_service_iam_policy" "noauth" {
-  location    = google_cloud_run_service.stock_app.location
-  service     = google_cloud_run_service.stock_app.name
-  project     = google_cloud_run_service.stock_app.project
-  policy_data = data.google_iam_policy.noauth.policy_data
+resource google_cloud_run_service_iam_member public_access {
+  count    = var.allow_public_access ? 1 : 0
+  service  = google_cloud_run_service.stock_app.name
+  location = google_cloud_run_service.stock_app.location
+  project  = google_cloud_run_service.stock_app.project
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
