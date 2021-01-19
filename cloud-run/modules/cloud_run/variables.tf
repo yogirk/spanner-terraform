@@ -58,8 +58,14 @@ variable cloud_run_timeout {
   description = "How long a Cloud Run operation is allowed to take before being considered a failure."
 }
 
-variable allow_public_access {
+variable allow_unauth_access {
   type        = bool
   default     = true
   description = "Allow non-authenticated access to the service."
+}
+
+variable iam_member {
+  type        = string
+  default     = ""
+  description = "Who have access to call Cloud Run service. For any users, need to prepend user:[email.com] and for service account prepent, serviceAccount:[serviceaccount] and for group prepend group:[group-email]"
 }

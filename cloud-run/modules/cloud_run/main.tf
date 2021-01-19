@@ -3,7 +3,9 @@ terraform {
 }
 
 locals {
-  service_name = format("%s-%s", var.service_name, var.suffix)
+  service_name        = format("%s-%s", var.service_name, var.suffix)
+  allow_authenticated = var.allow_unauth_access ? 1 : 0
+  members             = var.iam_member == "" ? "allUsers" : var.iam_member
 }
 
 resource "google_project_service" "gcr_api" {
@@ -58,10 +60,10 @@ resource "google_cloud_run_service" "stock_app" {
 }
 
 resource google_cloud_run_service_iam_member public_access {
-  count    = var.allow_public_access ? 1 : 0
+  count    = local.allow_authenticated
   service  = google_cloud_run_service.stock_app.name
   location = google_cloud_run_service.stock_app.location
   project  = google_cloud_run_service.stock_app.project
   role     = "roles/run.invoker"
-  member   = "allUsers"
+  member   = local.members
 }

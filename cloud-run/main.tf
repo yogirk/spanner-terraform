@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "[gcs-bucket-name]"
+    bucket = "[gcp-terraform-bucket-name]"
     prefix = "main"
   }
 }
