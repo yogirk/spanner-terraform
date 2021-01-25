@@ -1,0 +1,42 @@
+.start {
+    color: #3ea6e4;
+}
+
+.stop {
+    color: #d1302b;
+}
+
+.mat-actions {
+    margin: auto 0;
+}
+
+.mat-actions mat-icon {
+    font-size: 35px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.table-options {
+    text-align: right;
+}
+
+.table-options mat-form-field {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.table-options button {
+    display: inline-block;
+}
+
+.start-simulate-btn:not([disabled]) {
+    background: #3ea6e4;
+    color: #ffffff;
+}

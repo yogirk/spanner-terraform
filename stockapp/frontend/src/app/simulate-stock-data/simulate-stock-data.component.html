@@ -1,0 +1,118 @@
+<app-header></app-header>
+<app-side-nav></app-side-nav>
+<div class="spinner" *ngIf="this.loader">
+  <mat-spinner></mat-spinner>
+</div>
+<main class="stock-dashboard">
+
+  <div class="container-fluid mt-20">
+    <div class="row">
+      <div class="col-6" style="margin: auto;">
+        <span style="font-size: 18px;">
+          Simulate Data
+        </span>
+      </div>
+      <div class="col-6 table-options">
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-20">
+    <mat-card>
+      <form class="login-form" [formGroup]="simulateForm" (submit)="simulate()">
+        <div class="row">
+          <div class="col-3 ">
+            <mat-form-field appearance="standard">
+              <mat-label>Select Company</mat-label>
+              <mat-select formControlName="companyId" id="companyId">
+                <mat-option *ngFor="let company of this.companies" [disabled]="isAlreadyStarted(company.companyId)"
+                  [value]="company.companyId">{{ company.companyName }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-3 ">
+            <mat-form-field appearance="standard">
+              <mat-label>Select Interval</mat-label>
+              <mat-select formControlName="timeInterval" id="timeInterval">
+                <mat-option *ngFor="let tme of this.time" [value]="tme">{{ tme }}</mat-option>
+              </mat-select>
+              <mat-hint>In seconds</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-3 ">
+            <mat-form-field appearance="standard">
+              <mat-label>Number of Records</mat-label>
+              <mat-select formControlName="data" id="data">
+                <mat-option *ngFor="let data of this.datas" [value]="data">{{ data }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-1 mat-actions ">
+            <button type="submit" class="start-simulate-btn" matTooltip="Start Simulation" mat-stroked-button
+              [disabled]="!this.simulateForm.valid">Simulate</button>
+          </div>
+
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+  <div class="container-fluid mt-20">
+    <div class="row">
+      <div class="col-6" style="margin: auto;">
+        <span style="font-size: 18px;">
+          Manage Simulations
+        </span>
+      </div>
+      <div class="col-6 table-options">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mt-10">
+      <div class="col-12">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="companyName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+          </ng-container>
+
+          <!-- shortcode Column -->
+          <ng-container matColumnDef="companyShortCode">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Short Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.companyShortCode}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Simulation Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status?"In-progress":"Stoped"}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+            <td mat-cell *matCellDef="let row" style="padding:5px;">
+              <a href="javascript:void(0)" matTooltip="start simulation" *ngIf="!row.status" class="start"
+                (click)="this.updateSimulation(row)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">play_circle</mat-icon>
+              </a>
+              <a href="javascript:void(0)" matTooltip="stop simulation" *ngIf="row.status" class="stop"
+                (click)="this.updateSimulation(row)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">stop_circle</mat-icon>
+              </a>
+              &nbsp;&nbsp;
+              <a href="javascript:void(0)" class="delete-company-btn" matTooltip="Delete simulation"
+                (click)="this.deleteSimulation(row)"><i class="material-icons">delete</i></a>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 5, 3]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,18 @@
+<div class="side-bar side-bar-fixed">
+    <div class="side-bar-inner">
+        <ul>
+            <li>
+                <a class="{{ (this.curUrl == 'dashboard')?'active':'' }}" href="javascript:void(0)"
+                    routerLink="/dashboard"> Dashboard</a>
+            </li>
+            <li>
+                <a class="{{ (this.curUrl == 'company-list' || this.curUrl == 'add-company' || this.curUrl == 'edit-company')?'active':'' }}"
+                    href="javascript:void(0)" routerLink="/company-list"> Manage Company </a>
+            </li>
+            <li>
+                <a class="{{ (this.curUrl == 'simulate')?'active':'' }}" href="javascript:void(0)"
+                    routerLink="/simulate"> Simulate Data </a>
+            </li>
+        </ul>
+    </div>
+</div>
