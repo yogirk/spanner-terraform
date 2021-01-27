@@ -15,7 +15,13 @@ module "cloud_run_backend" {
   container_image_path = "gcr.io/searce-academy/backend:v1"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
-  env_var              = { "INSTANCE" = "<enter-spanner-instance-id>", "DATABASE" = "<enter-spanner-database-name>", "EXPIRE_IN" = "2d", "JWT_SECRET" = "w54p3Y?4dj%8Xqa2jjVC84narhe5Pk", "PROJECTID" = "<enter-GCP-project-id>" }
+  env_var = {
+    "INSTANCE"   = "<enter-spanner-instance-id>",
+    "DATABASE"   = "<enter-spanner-database-name>",
+    "EXPIRE_IN"  = "2d",
+    "JWT_SECRET" = "w54p3Y?4dj%8Xqa2jjVC84narhe5Pk",
+    "PROJECTID"  = "<enter-GCP-project-id>"
+  }
 }
 
 module "cloud_run_frontend" {
