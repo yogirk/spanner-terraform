@@ -13,6 +13,11 @@ output "container_image_path" {
   value       = var.container_image_path
 }
 
+output "env_var" {
+  description = "Environment variables of deployed Google Cloud Run service"
+  value       = var.env_var
+}
+
 output "latest_revision" {
   description = "Current version of deployed Cloud Run service"
   value       = var.latest_revision

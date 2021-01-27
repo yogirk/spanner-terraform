@@ -37,10 +37,9 @@ resource "google_cloud_run_service" "stock_app" {
         }
         dynamic "env" {
           for_each = var.env_var
-
           content {
-            name  = env_var.key
-            value = env_var.value
+            name  = env.key
+            value = env.value
           }
         }
       }

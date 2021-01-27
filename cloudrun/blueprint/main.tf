@@ -11,17 +11,18 @@ locals {
 module "cloud_run_backend" {
   source               = "../modules/cloud_run"
   suffix               = local.suffix
-  service_name         = "stock-app"
-  container_image_path = "gcr.io/<PROJECT_ID>/backend-docker-image-path:<tag>"
+  service_name         = "rohan-backend"
+  container_image_path = "gcr.io/searce-academy/backend:v1"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
+  env_var              = { "INSTANCE" = "<enter-spanner-instance-id>", "DATABASE" = "<enter-spanner-database-name>", "EXPIRE_IN" = "2d", "JWT_SECRET" = "w54p3Y?4dj%8Xqa2jjVC84narhe5Pk", "PROJECTID" = "<enter-GCP-project-id>" }
 }
-  
+
 module "cloud_run_frontend" {
   source               = "../modules/cloud_run"
   suffix               = local.suffix
-  service_name         = "frontend"
-  container_image_path = "gcr.io/<PROJECT_ID>/frontend-docker-image-path:<tag>"
+  service_name         = "rohan-frontend"
+  container_image_path = "gcr.io/searce-academy/backend:v1"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
 }
