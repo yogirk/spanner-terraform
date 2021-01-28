@@ -28,7 +28,7 @@ module "cloud_run_frontend" {
   source               = "../modules/cloud_run"
   suffix               = local.suffix
   service_name         = "rohan-frontend"
-  container_image_path = "gcr.io/searce-academy/backend:v1"
+  container_image_path = "gcr.io/searce-academy/frontend:v1"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
 }
