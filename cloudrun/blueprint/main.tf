@@ -20,7 +20,7 @@ module "cloud_run_backend" {
     "DATABASE"   = "<enter-spanner-database-name>",
     "EXPIRE_IN"  = "2d",
     "JWT_SECRET" = "w54p3Y?4dj%8Xqa2jjVC84narhe5Pk",
-    "PROJECTID"  = "<enter-GCP-project-id>"
+    "PROJECTID"  = var.gcp_project_id
   }
 }
 
