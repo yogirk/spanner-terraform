@@ -17,7 +17,7 @@ variable "instanceid" {
 variable "config" {
     description = "Cloud Spanner Instance config - Regional / multi-region. For allowed configurations, check: https://bit.ly/3niKT3r"
     type = string
-    default = "regional-us-west1"
+    #default = "regional-us-west1"
 }
 
 // Required
@@ -31,7 +31,7 @@ variable "display_name" {
 variable "num_nodes" {
     description = "Cloud Spanner instance configuration: Select number of nodes"
     type = number
-    default = 1
+    #default = 1
 }
 
 // Required
@@ -39,6 +39,6 @@ variable "num_nodes" {
 variable "dbname" {
     description = "Name of the database in Cloud Spanner"
     type = string
-    default = "sampledb"
+    default = "omegatradedb"
 }
 
