@@ -33,9 +33,12 @@ export class CreateCompanyComponent implements OnInit {
     }
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string,className:string) {
     this._snackBar.open(message, action, {
       duration: 2000,
+      panelClass: [className],
+      verticalPosition: 'bottom',
+      horizontalPosition:'right'
     });
   }
 
@@ -48,13 +51,13 @@ export class CreateCompanyComponent implements OnInit {
         response => {
           if(response && response.success){
             this.dialogRef.close(response);
-            this.openSnackBar(response.message,"")
+            this.openSnackBar(response.message,"",'green-snackbar')
           }
           this.loader = false;
         },
         error => {
           this.loader = false;
-          this.openSnackBar(error.error.message,"")
+          this.openSnackBar(error.error.message,"",'red-snack-bar')
       });
     }
   }

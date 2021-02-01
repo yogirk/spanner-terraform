@@ -996,5 +996,21 @@ mat-spinner
   left: 46%;
   z-index: 999999;
 }
-.red-snackbar{background-color: #d1302b;color: white;}
-.blue-snackbar{background-color: #3ea6e4;}
+.green-snackbar {
+  background-color: #3ea6e4;
+  color: white;
+}
+.green-snackbar button {
+  background-color: #3ea6e4;
+  color: white;
+  border: none;
+}
+.red-snackbar {
+  background: #d1302b;
+  color: white;
+}
+.red-snackbar button {
+  background-color: #d1302b;
+  color: white !important;
+  border: none;
+}

@@ -6,6 +6,7 @@ import { RestService } from './../auth/rest.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { TokenStorageService } from '../auth/token-storage.service'
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   signUpForm: any;
   loader: boolean = false;
   user: any;
-  constructor(private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private restService: RestService, private router: Router, private authService: SocialAuthService) {
+  constructor(private tokenStorage: TokenStorageService,private _snackBar: MatSnackBar, private formBuilder: FormBuilder, private restService: RestService, private router: Router, private authService: SocialAuthService) {
     this.signUpForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
       businessEmail: ['', [Validators.required, ValidationService.emailValidator]],
@@ -60,10 +61,9 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             response => {
               if (response && response.success) {
-                localStorage.setItem('userInfo', JSON.stringify(response.userInfo));
-                this.router.navigateByUrl('/dashboard');
-                this.openSnackBar(response.message, "")
+                this.tokenSuccessHandler(response)
               }
+              this.loader = false;
               this.loader = false;
             },
             error => {
@@ -72,6 +72,13 @@ export class RegisterComponent implements OnInit {
             });
       }
     }
+  }
+
+  tokenSuccessHandler(response) {
+    this.tokenStorage.saveToken(response.authToken);
+    this.tokenStorage.saveUser(response.userInfo);
+    this.router.navigateByUrl('/dashboard');
+    this.openSnackBar(response.message, "")
   }
 
   openSnackBar(message: string, action: string) {
