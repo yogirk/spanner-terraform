@@ -3,7 +3,7 @@
 variable "gcp_project_id" {
   description = "Id of the GCP project"
   type        = string
-  default     = "searce-academy" 
+  default     = "[gcp-project-name]" 
 }
 
 variable "region" {
