@@ -12,7 +12,7 @@ module "cloud_run_backend" {
   source               = "../../modules/cloud_run"
   suffix               = local.suffix
   service_name         = "omegatrade-backend"
-  container_image_path = "gcr.io/searce-academy/backend/path:tag"
+  container_image_path = "gcr.io/[project-id]/backend/path:tag"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
   env_var = {
