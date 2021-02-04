@@ -13,6 +13,11 @@ output "dbname" {
   value       = local.dbname
 }
 
+output "ddl_queries" {
+  description = "DDL being created in Google Cloud Spanner DB" 
+  value       = var.ddl_queries
+}
+
 output "labels_var" {
   description = "Labels of created Google Cloud Spanner Instance."
   value       = var.labels_var

@@ -26,10 +26,23 @@ resource "google_spanner_instance" "stockapp" {
   num_nodes    = var.num_nodes
   project      = var.gcp_project_id
   labels       = var.labels_var
+
+  timeouts {
+    create = var.spanner_instance_timeout
+    update = var.spanner_instance_timeout
+    delete = var.spanner_instance_timeout
+  }
 }
 
 resource "google_spanner_database" "stockapp_database" {
   instance            = google_spanner_instance.stockapp.name
   name                = local.dbname
+  ddl                 = var.ddl_queries
   deletion_protection = var.deletion_protection
+
+  timeouts {
+    create = var.spanner_db_timeout
+    update = var.spanner_db_timeout
+    delete = var.spanner_db_timeout
+  }
 }
