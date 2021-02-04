@@ -8,7 +8,7 @@ locals {
   suffix = format("%s-%s", "tf", random_string.launch_id.result)
 }
 
-module zian {
+module omegatrade {
   source                = "../modules/cloudspanner"
   suffix                = local.suffix
   gcp_project_id        = var.gcp_project_id
