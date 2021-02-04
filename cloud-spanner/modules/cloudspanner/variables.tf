@@ -36,7 +36,7 @@ variable "config" {
 
 variable "num_nodes" {
   type        = number
-  default     = 2
+  default     = 1
   description = "The number of nodes allocated to this instance."
 }
 
