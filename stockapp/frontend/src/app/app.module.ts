@@ -61,7 +61,7 @@ import { SimulateStockDataComponent } from './simulate-stock-data/simulate-stock
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '774306066972-6het3enggng0h838nfvetog20i4b4a9j.apps.googleusercontent.com'
+              '427907482591-qgi5lvlh5ntt8t7uqn2ctb3blq7j3sgr.apps.googleusercontent.com'
             )
           }
         ]
