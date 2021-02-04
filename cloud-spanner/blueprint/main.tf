@@ -8,11 +8,11 @@ locals {
   suffix = format("%s-%s", "tf", random_string.launch_id.result)
 }
 
-module stockapp {
+module zian {
   source                = "../modules/cloudspanner"
   suffix                = local.suffix
   gcp_project_id        = var.gcp_project_id
-  instance_id           = "stockapp"
-  dbname                = "stockapp-db"
+  instance_id           = "omega-trade"
+  dbname                = "omega-trade"
   labels_var            = { env = "test" }
 }
