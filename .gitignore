@@ -26,13 +26,14 @@
 # dependencies
 /node_modules
 /developer-documents
-/stockapp/frontend/node_modules/
+/omegatrade-app/frontend/node_modules/
 /frontend/dist
-/stockapp/frontend/package-lock.json
-/stockapp/stock-trade/package-lock.json
-/stockapp/stock-trade/node_modules
-/stock-trade/nodejs-spanner
-/stock-trade/fakedata.js
+/omegatrade-app/frontend/package-lock.json
+/omegatrade-app/backend/package-lock.json
+/omegatrade-app/backend/node_modules
+/backend/nodejs-spanner
+/backend/fakedata.js
+/omegatrade-app/frontend/dist/
 
 
 # profiling files
