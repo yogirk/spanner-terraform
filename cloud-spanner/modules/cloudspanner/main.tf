@@ -19,7 +19,7 @@ resource "google_project_service" "spanner_api" {
   disable_on_destroy = false
 }
 
-resource "google_spanner_instance" "stockapp" {
+resource "google_spanner_instance" "omega_trade" {
   name         = local.instance_id
   config       = var.config
   display_name = local.display_name
@@ -34,8 +34,8 @@ resource "google_spanner_instance" "stockapp" {
   }
 }
 
-resource "google_spanner_database" "stockapp_database" {
-  instance            = google_spanner_instance.stockapp.name
+resource "google_spanner_database" "omega_trade_database" {
+  instance            = google_spanner_instance.omega_trade.name
   name                = local.dbname
   ddl                 = var.ddl_queries
   deletion_protection = var.deletion_protection
