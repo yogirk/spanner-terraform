@@ -9,10 +9,10 @@ locals {
 }
 
 module "cloud_run_backend" {
-  source               = "../modules/cloud_run"
+  source               = "../../modules/cloud_run"
   suffix               = local.suffix
-  service_name         = "rohan-backend"
-  container_image_path = "gcr.io/searce-academy/backend:v1"
+  service_name         = "omegatrade-backend"
+  container_image_path = "gcr.io/[project-id]/backend/path:tag"
   region               = var.region
   gcp_project_id       = var.gcp_project_id
   env_var = {
@@ -22,13 +22,4 @@ module "cloud_run_backend" {
     "JWT_SECRET" = "w54p3Y?4dj%8Xqa2jjVC84narhe5Pk",
     "PROJECTID"  = var.gcp_project_id
   }
-}
-
-module "cloud_run_frontend" {
-  source               = "../modules/cloud_run"
-  suffix               = local.suffix
-  service_name         = "rohan-frontend"
-  container_image_path = "gcr.io/searce-academy/frontend:v1"
-  region               = var.region
-  gcp_project_id       = var.gcp_project_id
 }
