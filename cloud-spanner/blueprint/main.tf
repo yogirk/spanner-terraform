@@ -12,7 +12,7 @@ module zian {
   source                = "../modules/cloudspanner"
   suffix                = local.suffix
   gcp_project_id        = var.gcp_project_id
-  instance_id           = "zian"
-  dbname                = "zian-db"
+  instance_id           = "omega-trade"
+  dbname                = "omega-trade"
   labels_var            = { env = "test" }
 }
