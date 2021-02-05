@@ -72,13 +72,12 @@ export class StockDashboardComponent implements OnInit {
             this.companies = this.response.data;
             if (this.curCompany == "") {
               let index = this.companies.findIndex(x => {
-                if(x.companyName.toLowerCase().trim() === "google corp" || x.companyName.toLowerCase().trim() ==="google" )
-                return x;
+                if (x.companyName.toLowerCase().trim() === "google corp" || x.companyName.toLowerCase().trim() === "google")
+                  return x;
               });
-              console.log(index)
-              if(index>0){
+              if (index > 0) {
                 this.curCompany = this.companies[index].companyId;
-              }else{
+              } else {
                 this.curCompany = this.companies[0].companyId;
               }
               this.getStockData();
@@ -98,10 +97,6 @@ export class StockDashboardComponent implements OnInit {
       },
       title: {
         text: this.company.companyName + ' Stock Price'
-      },
-      yAxis: {
-        max: 140,
-        min: 105
       },
       series: [{
         tooltip: {
@@ -129,6 +124,9 @@ export class StockDashboardComponent implements OnInit {
           response => {
             if (response && response.success) {
               let data = response.data.stocks
+              console.log(this.stocks)
+              if (data.length === 0)
+                this.subscription.unsubscribe();
               this.stock.ref$.subscribe(chart => {
                 for (var i = 0; i < data.length; i++) {
                   chart.series[0].addPoint([data[i].date, data[i].currentValue]);
@@ -145,6 +143,6 @@ export class StockDashboardComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.subscription && this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

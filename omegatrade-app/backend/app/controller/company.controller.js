@@ -1,17 +1,14 @@
 'use strict';
 const Company = require('../models/company.model')
 const Simulation = require('../models/companySimulation.model')
-const {
-    v4: uuidv4
-} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 exports.getList = async function (req, res) {
     await Company.getAll(function (err, data) {
-        console.log(err);
         if (err)
             res.json({
                 success: false,
-                message: "Error Occured while fetching all Company"
+                message: "Error occured while fetching all Company"
             });
         if (data == null) {
             res.json({
@@ -34,7 +31,7 @@ exports.getDashboardStock = async function (req, res) {
         if (err)
             res.json({
                 success: false,
-                message: "Error Occured while fetching company stock"
+                message: "Error occured while fetching company stock"
             });
         if (data == null) {
             res.json({
@@ -43,7 +40,6 @@ exports.getDashboardStock = async function (req, res) {
             });
         }
         if (data) {
-            console.log(data)
             res.status(200).json({
                 success: true,
                 data: data
@@ -66,7 +62,7 @@ exports.create = async function (req, res) {
         if (err) {
             res.json({
                 success: false,
-                message: "Error Occured while creating company"
+                message: "Error occured while creating company"
             });
         }
         if (data == null) {
@@ -89,16 +85,15 @@ exports.update = async function (req, res) {
     if (params && params.companyId) {
         await Company.update(params, function (err, data) {
             if (err) {
-                console.log(err);
                 res.json({
                     success: false,
-                    message: "Error Occured while updating company"
+                    message: "Error occured while updating company"
                 });
             }
             if (data) {
                 res.status(200).json({
                     success: true,
-                    message: "company details updated sucessfully"
+                    message: "Company details updated sucessfully"
                 });
             }
         });
@@ -154,6 +149,8 @@ exports.simulateCompany = async function (req, res) {
             if (data.length > 0) {
                 let company = data[0];
                 let interval = params.timeInterval * 1000;
+                let fakeStockmarketgenerator = require('fake-stock-market-generator');
+                const stock = fakeStockmarketgenerator.generateStockData(params.data).priceData;
                 Simulation.create(company, function (err, sId) {
                     if (err) {
                         console.log('Error while simulating company', err);
@@ -162,7 +159,7 @@ exports.simulateCompany = async function (req, res) {
                         for (var i = 0; i < params.data; i++) {
                             setTimeout(function (i) {
                                 var stockData = {};
-                                stockData.currentValue = Spanner.float(randDec(130, 131, 2))
+                                stockData.currentValue = Spanner.float(stock[i].price)
                                 stockData.companyStockId = uuidv4();
                                 stockData.companyId = params.companyId;
                                 stockData.companyShortCode = company.companyShortCode
@@ -220,24 +217,12 @@ exports.simulateAllCompany = async function (req, res) {
                 const today = new Date()
                 const start = addMonths(new Date(), -1);
                 var dates = getDatesBetweenDates(start, today);
+                let fakeStockmarketgenerator = require('fake-stock-market-generator');
+                const stock = fakeStockmarketgenerator.generateStockData(dates.length).priceData;
+                console.log('stock',stock);
                 for (var j = 0; j < dates.length; j++) {
                     var stockData = {};
-                    let min = 0;
-                    let max = 0;
-                    let precision = 4;
-                    if (j <= 29)
-                        min = 130;
-                    max = 131;
-                    if (j >= 30 && j < 90)
-                        min = 110;
-                    max = 111;
-                    if (j >= 90 && j < 120)
-                        min = 137;
-                    max = 139;
-                    if (j >= 120 && j < 180)
-                        min = 110;
-                    max = 111;
-                    stockData.currentValue = Spanner.float(randDec(min, max, precision))
+                    stockData.currentValue = Spanner.float(stock[j].price)
                     stockData.companyStockId = uuidv4();
                     stockData.companyId = companyId;
                     stockData.companyShortCode = params[i].symbol
@@ -259,8 +244,6 @@ exports.simulateAllCompany = async function (req, res) {
                     stockData.adjVolume = Spanner.float(randDec(5, 4000, 2))
                     stockData.timestamp = 'spanner.commit_timestamp()'
                     Company.createStockData(stockData, function (error, data) {
-                        console.log('error', error);
-                        console.log('data', data);
                     });
                 }
             }
