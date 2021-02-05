@@ -9,5 +9,5 @@ variable "gcp_project_id" {
 variable "region" {
   description = "Region for GCP resources. See https://cloud.google.com/compute/docs/regions-zones"
   type        = string
-  default     = "us-central1"
+  default     = "us-west1"
 }

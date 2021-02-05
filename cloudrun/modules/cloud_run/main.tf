@@ -23,7 +23,7 @@ resource "google_project_service" "compute_api" {
   disable_on_destroy = false
 }
 
-resource "google_cloud_run_service" "stock_app" {
+resource "google_cloud_run_service" "omega_trade" {
   name     = local.service_name
   location = var.region
   project  = var.gcp_project_id
@@ -60,9 +60,9 @@ resource "google_cloud_run_service" "stock_app" {
 
 resource google_cloud_run_service_iam_member public_access {
   count    = local.allow_authenticated
-  service  = google_cloud_run_service.stock_app.name
-  location = google_cloud_run_service.stock_app.location
-  project  = google_cloud_run_service.stock_app.project
+  service  = google_cloud_run_service.omega_trade.name
+  location = google_cloud_run_service.omega_trade.location
+  project  = google_cloud_run_service.omega_trade.project
   role     = "roles/run.invoker"
   member   = local.members
 }
