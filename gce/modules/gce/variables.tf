@@ -66,7 +66,7 @@ variable "boot_disk_image" {
 variable "vpc_network_name" {
   type        = string
   default     = "default"
-  description = "Virtual Private Network in which GCE VM Instance would be created. If you have custom VPC network, supply VPC Network Name."
+  description = "Virtual Private Cloud in which GCE VM Instance would be created. If you have custom VPC network, supply VPC Network Name."
 }
 
 variable "allow_stopping_for_update" {

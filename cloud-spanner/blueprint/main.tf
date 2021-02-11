@@ -9,10 +9,12 @@ locals {
 }
 
 module omegatrade {
-  source                = "../modules/cloudspanner"
-  suffix                = local.suffix
-  gcp_project_id        = var.gcp_project_id
-  instance_id           = "omega-trade"
-  dbname                = "omega-trade"
-  labels_var            = { env = "test" }
+  source         = "../modules/cloudspanner"
+  suffix         = local.suffix
+  gcp_project_id = var.gcp_project_id
+  config         = "regional-asia-east1"
+  instance_id    = "kiteretsu"
+  dbname         = "kiteretsu"
+  labels_var     = { env = "test" }
+  num_nodes      = 5
 }

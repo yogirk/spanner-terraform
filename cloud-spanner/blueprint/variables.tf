@@ -2,6 +2,6 @@
 
 variable "gcp_project_id" {
   type        = string
-  default     = "[gcp-project-id]"
+  default     = "searce-academy"
   description = "Id of the GCP project"
 }

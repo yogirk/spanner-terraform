@@ -9,11 +9,11 @@ locals {
 }
 
 module omegatrade {
-  source           = "../modules/gce-instance"
+  source           = "../modules/gce"
   suffix           = local.suffix
   gcp_project_id   = var.gcp_project_id
   region           = var.region
   vpc_network_name = "default"
-  instance_name    = "kylo-ren"
+  instance_name    = "spanner-emulator"
   network_tags     = ["http-server", "https-server", "ssh"]
 }

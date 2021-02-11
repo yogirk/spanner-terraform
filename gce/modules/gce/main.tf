@@ -64,6 +64,8 @@ resource "google_compute_instance" "omega_trade" {
     }
   }
 
+  metadata_startup_script = "sudo apt get update -y; sudo apt get upgrade -y; wget https://storage.googleapis.com/cloud-spanner-emulator/releases/1.1.1/cloud-spanner-emulator_linux_amd64-1.1.1.tar.gz; tar zxvf cloud-spanner-emulator_linux_amd64-1.1.1.tar.gz; chmod u+x gateway_main emulator_main; ./emulator_main --host_port localhost:1234; ./gateway_main --hostname localhost --grpc_port 1234 --http_port 1235"
+
   allow_stopping_for_update = var.allow_stopping_for_update
   lifecycle {
     ignore_changes = [
