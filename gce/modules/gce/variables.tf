@@ -59,7 +59,7 @@ variable "boot_disk_type" {
 
 variable "boot_disk_image" {
   type        = string
-  default     = "ubuntu-2004-lts"
+  default     = "ubuntu-1804-lts"
   description = "GCE VM Instance Underlying Operating System"
 }
 
