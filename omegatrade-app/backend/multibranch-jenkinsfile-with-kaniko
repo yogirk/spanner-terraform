@@ -129,7 +129,7 @@ spec:
                 container('gcloud'){
                     sh 'kubectl version'
                     sh 'gcloud auth activate-service-account --key-file=/secret/kaniko-secret.json'
-                    sh 'gcloud run deploy omegatrade-backend-dev --image=gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=["PROJECTID=searce-academy", "INSTANCE=spanner_id", "DATABASE=spanner_database", "JWT_SECRET="abc123", "EXPIRE_IN="2d"]'
+                    sh 'gcloud run deploy omegatrade-backend-dev --image=gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=PROJECTID=searce-academy --set-env-vars=INSTANCE=spanner_id --set-env-vars=DATABASE=spanner_database --set-env-vars=JWT_SECRET=abc123 --set-env-vars=EXPIRE_IN=2d]'
                 }
             }
         }
@@ -142,7 +142,7 @@ spec:
                 container('gcloud'){
                     sh 'kubectl version'
                     sh 'gcloud auth activate-service-account --key-file=/secret/kaniko-secret.json'
-                    sh 'gcloud run deploy omegatrade-backend-prod --image=gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=["PROJECTID=searce-academy", "INSTANCE="spanner_id", "DATABASE=spanner_database", "JWT_SECRET="abc123", "EXPIRE_IN="2d"]'
+                    sh 'gcloud run deploy omegatrade-backend-prod --image=gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=PROJECTID=searce-academy --set-env-vars=INSTANCE=spanner_id --set-env-vars=DATABASE=spanner_database --set-env-vars=JWT_SECRET=abc123 --set-env-vars=EXPIRE_IN=2d]'
                 }
             }
         }
