@@ -107,7 +107,7 @@ spec:
 
         stage ('building docker image - prod') {
             when {
-                branch 'uat'
+                branch 'prod'
             }
             steps {
                 dir ('omegatrade-app/backend') {
@@ -121,7 +121,7 @@ spec:
                 }
             }
         }
-        stage ('deploy to k8s - main') {
+        stage ('deploy to cloud run - main') {
             when {
                 branch 'main'
             }
@@ -129,12 +129,12 @@ spec:
                 container('gcloud'){
                     sh 'kubectl version'
                     sh 'gcloud auth activate-service-account --key-file=/secret/kaniko-secret.json'
-                    sh 'gcloud run deploy omegatrade-backend-dev --image=gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=[PROJECTID=searce-academy, INSTANCE=spanner_id, DATABASE=spanner_database, JWT_SECRET=abc123, EXPIRE_IN=2d]'
+                    sh 'gcloud run deploy omegatrade-backend-dev --image=gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=[PROJECTID="searce-academy", INSTANCE="spanner_id", DATABASE="spanner_database", JWT_SECRET="abc123", EXPIRE_IN="2d"]'
                 }
             }
         }
 
-        stage ('deploy to k8s - prod') {
+        stage ('deploy to cloud run - prod') {
             when {
                 branch 'prod'
             }
@@ -142,7 +142,7 @@ spec:
                 container('gcloud'){
                     sh 'kubectl version'
                     sh 'gcloud auth activate-service-account --key-file=/secret/kaniko-secret.json'
-                    sh 'gcloud run deploy omegatrade-backend-prod --image=gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=[PROJECTID=searce-academy, INSTANCE=spanner_id, DATABASE=spanner_database, JWT_SECRET=abc123, EXPIRE_IN=2d]'
+                    sh 'gcloud run deploy omegatrade-backend-prod --image=gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --platform=managed --region=us-west1 --allow-unauthenticated --project=searce-academy --set-env-vars=[PROJECTID="searce-academy", INSTANCE="spanner_id", DATABASE="spanner_database", JWT_SECRET="abc123", EXPIRE_IN="2d"]'
                 }
             }
         }
