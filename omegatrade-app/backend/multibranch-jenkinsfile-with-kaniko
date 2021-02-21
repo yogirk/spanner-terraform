@@ -98,7 +98,7 @@ spec:
                         sh 'pwd'
                         sh """
                         #!/busybox/sh 
-                        /kaniko/executor --dockerfile Dockerfile --context `pwd`/ --verbosity debug --insecure --skip-tls-verify --destination gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --destination gcr.io/searce-academy/omega-trade/dev/backend:latest
+                        /kaniko/executor --dockerfile dockerfile --context `pwd`/ --verbosity debug --insecure --skip-tls-verify --destination gcr.io/searce-academy/omega-trade/dev/backend:$BUILD_NUMBER --destination gcr.io/searce-academy/omega-trade/dev/backend:latest
                         """
                     }
                 }
@@ -115,7 +115,7 @@ spec:
                         sh 'pwd'
                         sh """
                         #!/busybox/sh 
-                        /kaniko/executor --dockerfile Dockerfile --context `pwd`/ --verbosity debug --insecure --skip-tls-verify --destination gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --destination gcr.io/searce-academy/omega-trade/prod/backend:latest
+                        /kaniko/executor --dockerfile dockerfile --context `pwd`/ --verbosity debug --insecure --skip-tls-verify --destination gcr.io/searce-academy/omega-trade/prod/backend:$BUILD_NUMBER --destination gcr.io/searce-academy/omega-trade/prod/backend:latest
                         """
                     }  
                 }
